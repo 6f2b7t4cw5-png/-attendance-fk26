@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>متابعة الغياب</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1fd;--card:#fff;--ink:#2a2140;--mut:#7a6f96;--line:#e7dcf6;--pri:#7c4dcc;--priS:#ece2fb;--e:#c98a10;--eS:#fbf0d6;--u:#c8453b;--uS:#fbe3e0;--ok:#2f8f5b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17121f;--card:#221b2e;--ink:#f1ecfa;--mut:#a89dc2;--line:#362c48;--pri:#b79af0;--priS:#2f2447;--e:#e6b34a;--eS:#37301a;--u:#f0766c;--uS:#3a1f1c;--ok:#5cc88c}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(circle at 100% 0,var(--priS),transparent 45%),var(--bg);background-attachment:fixed;color:var(--ink);font-family:Tajawal,system-ui,sans-serif;font-size:16px;line-height:1.5;padding-bottom:40px}
+header{padding:12px 12px 4px;max-width:760px;margin:auto}
+.hero{position:relative;overflow:hidden;padding:22px 20px 18px;border-radius:28px;background:linear-gradient(135deg,#7a4fd0,#a98aee 62%,#f2b8e6 150%);color:#fff;box-shadow:0 14px 30px -14px rgba(124,77,204,.75)}
+.hero i{position:absolute;font-style:normal;color:#fff4c2;animation:tw 2.6s ease-in-out infinite}
+@keyframes tw{50%{opacity:.25;transform:scale(.7)}}
+.hero:before,.hero:after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.1)}
+.hero:before{width:170px;height:170px;left:-50px;top:-60px}
+.hero:after{width:110px;height:110px;left:70px;bottom:-60px;background:rgba(255,200,240,.35)}
+.hero>*{position:relative;z-index:1}
+.hero .kick{display:inline-block;background:rgba(255,255,255,.18);padding:3px 12px;border-radius:99px;font-size:13px;font-weight:700;margin-bottom:8px}
+.hero h1{font-size:30px;color:#fff;margin:0}
+.hero p{color:rgba(255,255,255,.85);margin:4px 0 14px;font-size:14px}
+.hero .by{display:inline-flex;align-items:center;gap:6px;background:#fff;color:#6a3fc0;font-weight:800;font-size:14px;padding:7px 14px;border-radius:99px}
+footer{text-align:center;color:var(--mut);font-size:13px;margin-top:22px}
+footer b{color:var(--pri)}
+body:before{content:"";position:fixed;inset:0;z-index:-1;opacity:.55;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='130' height='130'%3E%3Cpath fill='%23b69af0' fill-opacity='.4' d='M20 8l3 8 8 .5-6.3 5 2.3 8L20 25l-7 4.5 2.3-8L9 16.5 17 16z'/%3E%3Cpath fill='%23eaa6d8' fill-opacity='.45' d='M95 78l2 5.5 5.5.4-4.3 3.4 1.6 5.5-4.8-3.1-4.8 3.1 1.6-5.5-4.3-3.4 5.5-.4z'/%3E%3Ccircle cx='75' cy='25' r='2' fill='%23b69af0' fill-opacity='.5'/%3E%3Ccircle cx='30' cy='95' r='1.6' fill='%23eaa6d8' fill-opacity='.5'/%3E%3C/svg%3E")}
+h1{margin:0;font-size:24px;font-weight:800}
+header p{margin:2px 0 0;color:var(--mut);font-size:14px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;padding:8px 12px;max-width:760px;margin:auto}
+nav button{flex:1;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;padding:10px 4px;border-radius:14px;position:relative}
+nav button.on{background:linear-gradient(135deg,#7a4fd0,#a98aee);color:#fff;border-color:transparent;box-shadow:0 8px 16px -8px rgba(124,77,204,.8)}
+nav button{border-radius:99px;padding:11px 4px}
+.badge{position:absolute;top:-6px;left:-4px;background:var(--u);color:#fff;font-size:12px;border-radius:99px;min-width:20px;padding:0 5px}
+main{max-width:760px;margin:auto;padding:8px 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:14px;box-shadow:0 8px 22px -14px rgba(0,0,0,.35)}
+textarea,input,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px}
+textarea{min-height:110px}
+.btn{border:0;background:linear-gradient(135deg,#7a4fd0,#a98aee);color:#fff;font:inherit;font-weight:700;padding:10px 16px;border-radius:12px}
+.btn.s{background:var(--priS);color:var(--pri)}
+.btn.g{background:transparent;color:var(--mut);border:1px solid var(--line)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sp{flex:1}
+.st{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+.st:last-child{border:0}
+.st b{flex:1}
+.seg{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--mut);font:inherit;font-size:13px;font-weight:700;padding:7px 10px}
+.seg button.p.on{background:var(--priS);color:var(--ok)}
+.seg button.e.on{background:var(--eS);color:var(--e)}
+.seg button.u.on{background:var(--uS);color:var(--u)}
+.cls{color:var(--mut);font-size:13px;font-weight:400}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;font-size:13px;font-weight:700}
+.tag.e{background:var(--eS);color:var(--e)}.tag.u{background:var(--uS);color:var(--u)}
+.al{border-inline-start:6px solid var(--e)}.al.u{border-inline-start-color:var(--u)}.al.done{opacity:.5}
+.lv{font-size:24px;font-weight:800;line-height:1;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--eS);color:var(--e);flex:none}.al.u .lv{background:var(--uS);color:var(--u)}
+.dates{color:var(--mut);font-size:13px;margin:6px 0 10px}
+.sum{display:flex;gap:8px;margin-bottom:12px}
+.sum div{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.sum b{display:block;font-size:22px}
+.empty{text-align:center;color:var(--mut);padding:30px 0}
+.tabs2{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+.tabs2 button{border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;padding:6px 14px;border-radius:99px}
+.tabs2 button.on{background:var(--ink);color:var(--bg)}
+#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:20;overflow:auto;padding:16px}
+#modal.show{display:block}
+.sheet{background:#fff;color:#111;max-width:560px;margin:auto;border-radius:16px;padding:22px}
+.sheet h2{text-align:center;margin:0 0 4px;font-size:20px}
+.sheet .sub{text-align:center;color:#666;font-size:13px;margin-bottom:14px}
+.sheet table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.sheet td{border:1px solid #bbb;padding:8px;font-size:15px}
+.sheet td:first-child{background:#f1efe9;font-weight:700;width:32%}
+.sheet input,.sheet textarea{background:#fff;color:#111;border:0;padding:0;min-height:0;width:100%}
+.sig{display:flex;justify-content:space-between;margin-top:26px;font-size:14px}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.nm{color:var(--pri);text-decoration:underline;font-weight:700}
+.sheet .hd{display:flex;justify-content:space-between;align-items:center;text-align:center;font-size:12px;font-weight:700;line-height:1.8}
+.sheet .ttl{background:#6a3fc0;color:#fff;text-align:center;padding:9px;border-radius:10px;font-weight:800;margin:12px 0}
+.sheet th{background:#ece2fb;border:1px solid #bbb;padding:6px;font-size:13px}
+.sheet .t2 td:first-child{background:#fff;font-weight:400;width:auto}
+.sheet .t2 td.l{background:#f1efe9;font-weight:700;width:auto}
+.sheet tr.cur td{background:#f3ecff}
+.sheet .note{font-size:12px;color:#444;margin:8px 0}
+@media print{body *{visibility:hidden}#modal,#modal *{visibility:visible}#modal{position:absolute;background:#fff;padding:0}.noprint{display:none!important}.sheet{border-radius:0}}
+</style>
+</head>
+<body>
+<header><div class="hero"><i style="top:14px;left:22px;font-size:22px">★</i><i style="top:60px;left:90px;font-size:12px;animation-delay:.6s">✦</i><i style="top:20px;left:150px;font-size:14px;animation-delay:1.2s">★</i><i style="bottom:16px;left:40px;font-size:16px;animation-delay:1.8s">✦</i><i style="top:18px;left:46%;font-size:11px;animation-delay:.9s">★</i><span class="kick">🏫 متوسطة فاطمة بنت الخطاب</span><h1>متابعة الغياب</h1><p>سجّلي الغياب اليومي وتطلع لك التنبيهات تلقائياً</p><span class="by">✍️ إعداد الإدارية: منال اليحيى</span></div></header>
+<nav id="nav"></nav>
+<main id="app"></main>
+<footer>إعداد الإدارية <b>منال اليحيى</b></footer>
+<div id="modal"></div>
+<script>
+const LV=[3,5,10];
+const ACT={3:'تنبيه ولي الأمر وتوجيه الطالبة',5:'استدعاء ولي الأمر وأخذ تعهد خطي',10:'إحالة للموجهة الطلابية ورفع الحالة للإدارة'};
+let S={students:[],abs:{},done:{}};
+try{const r=localStorage.getItem('abs1');if(r)S=JSON.parse(r)}catch(e){}
+const save=()=>{try{localStorage.setItem('abs1',JSON.stringify(S))}catch(e){}};
+const SEED={'٣/٥':`أرين بنت محمد بن رشيد التميمي
+اسيل بنت سالم بن عامر الشهري
+ألين بنت حمدان بن حسن بن سالم ال جبار الشهري
+ايلاف بنت ماهر بن عشيان السميري العتيبي
+بيلسان بنت عبدالله بن عوض البدراني الحربي
+تالا بنت بدر بن غزاي الحنيني الحربي
+تالا بنت عبدالرحمن بن مبارك ال مرحب الشهري
+تالا بنت مروان بن عبدالله بن محمد العويسي
+جمان بنت محمد بن عوض بن عبدالله السرحاني
+جنى بنت سلطان بن محمد العجمي
+جود بنت تركي بن شعلان ال مرزن الشهراني
+جود بنت سعود بن مشعل الشعيفاني الحربي
+حصه بنت فهد بن محمد العجمي
+حياة بنت عبدالعزيز بن دخيل الدخيل
+رغد بنت تركي بن عبدالكريم الحربي
+رها بنت خالد بن محمد ابابطين
+ريما بنت بدر بن احمد ال فاضل الغامدي
+ريماس بنت عبدالاله بن عواض الروقي العتيبي
+شادن بنت خالد بن سعيد الغامدي
+صالحه بنت ناجم بن معتق بن مسلم القرعاني البلوي
+صبا بنت حسين بن علي الشهري
+عبير بنت عبدالكريم بن عبدالله بن عبدالرحمن الشلاش
+غناتي بنت فواز بن عبيد الحافي العتيبي
+غنى بنت يوسف بن احمد الكناني الزهراني
+فاطمه بنت عبدالملك بن محمد بن عمر شبوت العتين
+فيروز بنت صالح بن ربيع الصيعري
+كنده بنت طارق بن صالح المسند
+لانا بنت عبدالله بن مقعد المفيلحي السبيعي
+لطيفة بنت فيصل بن جمال الغبان
+لمى بنت فارس بن عبداللطيف العنزي
+ليان بنت عبدالله بن احمد مفرح معيني
+ليان بنت منصور بن حمد العبره
+لين بنت خالد بن علي بن يحي العسيري
+لين بنت سليمان بن عبدالله البكري الشهري
+لين بنت عبدالعزيز بن محمد العبداللطيف
+لين بنت عبدالله بن محمد العبري
+ميار بنت عبدالله بن مبارك بن سعد آل سرار القحطاني
+ميثاء بنت فهد بن عبدالله بن محمد ال ضمين الهاجري
+همس بنت عبدالله بن احمد المشنوي الفيفي
+جوان الحايك`,'٣/٦':`أصايل بنت ناصر بن فالح بن بنيان الرشيدي السبيعي
+المياسة بنت علي بن كحلان ال الحارث
+ألين بنت عادل بن زيدان السبيعي العنزي
+ألين بنت هادي بن عطاالله الضويفري المطيري
+أميرة بنت منصور بن سعود العصيمي العتيبي
+جني بنت محمد بن دخيل بن عبدالله الفالح
+حلا بنت عادل ابن سعيد الحوالي الغامدي
+خلود بنت محمد ابن عسل ابن سعيد السلسل الدوسري
+داليا بندر بن سلطان السهلي
+دانه بنت محمد بن فهد بن حصين الحافي العتيبي
+دلال بنت ناصر بن سعود بن سهل آل سهل
+ديلا بنت تركي بن محمد الشهراني
+ديم بنت عبدالرحمن بن فارع الشاطري المطيري
+ديما بنت خالد بن هندي بن محمد الجارالله الدوسري
+ديما بنت محمد بن عوض البشري القحطاني
+رفا بنت ممدوح بن معجب بن مطلق بن ناشر الناشر
+رهف بنت دخيل الله بن عبدالرحمن آل عبدالرحمن العامري
+روند بنت عبدالكريم بن عبدالعزيز بن سليمان الحديثي
+ريما بنت ناصر بن مشبب بن علي آل رفيدي الاسمري
+ريما بنت نايف بن فهد العصيمي العتيبي
+ريماس بنت نايف بن حمد بن عويض العصيمي
+ريمان بنت فهد بن عايض آل دلمج العمري
+سارة بنت فايز بن خليفه العوجان الكويكي
+سجى بنت عبدالله بن سعيد ال عمار الشهري
+شهد بنت حمد بن سليمان بن حمد الجديبي
+صبا بنت عمر ابن عوض آل مساعد القحطاني
+فاتن بنت خالد بن علي العبيان المطيري
+فرح بنت محمد بن ظافر ال شفقوت الاحمري
+لانا بنت سعيد بن علي الاحمري
+لجين بنت علي بن حسين المالكي
+ليان بنت عبدالعزيز بن حمود الاحمري
+لين بنت طلال بن عبدالله المخلفي الحربي
+لين بنت محمد بن ظافر ال عامر الشهري
+مها بنت عبدالعزيز بن ظافر بن محمد آل مرزوق القحطاني
+ميان بنت مشعل بن ثواب بن فاير المفلحي السبيعي
+نجود بنت طلال بن هيكل بن راكان المرشد
+ندى بنت عاضن بن مناحي الغامدي
+نوره بنت عبدالله بن راشد ال رشيد
+نوره بنت علي بن علي بن محمد بن جازع القحطاني
+هند بنت عبدالهادي بن ظافر بن محمد آل مرزوق القحطاني
+وصال بنت محسن بن برجس بن عقتان المفلحي
+وهج بنت ممدوح بن معجب بن مطلق بن ناشر الناشر`};
+if(!S.seeded){let i=0;Object.entries(SEED).forEach(([c,t])=>t.split('\n').forEach(n=>{i++;if(!S.students.some(s=>s.name===n&&s.cls===c))S.students.push({id:'sd'+i,name:n,cls:c})}));S.seeded=1;save()}
+let tab='alerts',date=new Date().toISOString().slice(0,10),filt='all';
+const $=s=>document.querySelector(s);
+const fd=d=>new Date(d+'T00:00:00').toLocaleDateString('ar-SA-u-ca-gregory',{weekday:'long',day:'numeric',month:'numeric',year:'numeric'});
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function stats(){const out=[];
+ S.students.forEach(s=>{['e','u'].forEach(t=>{
+  const ds=Object.keys(S.abs).filter(d=>S.abs[d][s.id]===t).sort();
+  const n=ds.length;let lv=0;LV.forEach(l=>{if(n>=l)lv=l});
+  if(lv)out.push({s,t,n,lv,ds,key:s.id+t+lv});
+ })});
+ return out.sort((a,b)=>b.lv-a.lv||b.n-a.n)}
+function nav(){const n=stats().filter(a=>!S.done[a.key]).length;
+ $('#nav').innerHTML=[['alerts','التنبيهات'],['daily','الغياب اليومي'],['honor','المواظبات'],['students','الطالبات']].map(([k,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')">${l}${k==='alerts'&&n?`<span class="badge">${n}</span>`:''}</button>`).join('')}
+function go(t){tab=t;render()}
+function render(){nav();({alerts:rAlerts,daily:rDaily,students:rStudents,honor:rHonor})[tab]()}
+function rStudents(){
+ $('#app').innerHTML=`<div class="card"><b>إضافة طالبات</b><p class="cls">اكتبي اسم كل طالبة في سطر. ممكن تضيفين الصف بعد شرطة: نورة العتيبي - 1/أ</p><textarea id="names" placeholder="نورة محمد العتيبي - 1/أ&#10;نورة ناصر المالكي - 1/ب"></textarea><div class="row" style="margin-top:8px"><button class="btn" onclick="addS()">إضافة</button></div></div>
+ <div class="card"><b>الطالبات (${S.students.length})</b>${S.students.length?S.students.map(s=>`<div class="st"><b>${esc(s.name)} <span class="cls">${esc(s.cls||'')}</span></b><button class="btn g" onclick="delS('${s.id}')">حذف</button></div>`).join(''):'<div class="empty">ما أضفتي أي طالبة بعد</div>'}</div>`}
+function addS(){const v=$('#names').value.split('\n').map(x=>x.trim()).filter(Boolean);
+ v.forEach(l=>{const p=l.split(/\s[-–—]\s/);S.students.push({id:'s'+Date.now()+Math.random().toString(36).slice(2,6),name:p[0].trim(),cls:(p[1]||'').trim()})});save();render()}
+function delS(id){if(!confirm('حذف الطالبة وسجل غيابها؟'))return;S.students=S.students.filter(s=>s.id!==id);Object.values(S.abs).forEach(d=>delete d[id]);save();render()}
+function rDaily(){
+ const day=S.abs[date]||{};const e=Object.values(day).filter(x=>x==='e').length,u=Object.values(day).filter(x=>x==='u').length;
+ $('#app').innerHTML=`<div class="card"><input type="date" value="${date}" onchange="date=this.value;render()"><div class="dates">${fd(date)}</div>
+ <div class="sum"><div><b>${S.students.length-e-u}</b>حاضرة</div><div><b style="color:var(--e)">${e}</b>بعذر</div><div><b style="color:var(--u)">${u}</b>بدون عذر</div></div>
+ ${S.students.length?S.students.map(s=>{const v=day[s.id]||'p';return `<div class="st"><b>${esc(s.name)} <span class="cls">${esc(s.cls||'')}</span></b><div class="seg"><button class="p ${v==='p'?'on':''}" onclick="mark('${s.id}','p')">حاضرة</button><button class="e ${v==='e'?'on':''}" onclick="mark('${s.id}','e')">بعذر</button><button class="u ${v==='u'?'on':''}" onclick="mark('${s.id}','u')">بدون</button></div></div>`}).join(''):'<div class="empty">أضيفي الطالبات أول</div>'}</div>`}
+function mark(id,v){S.abs[date]=S.abs[date]||{};if(v==='p')delete S.abs[date][id];else S.abs[date][id]=v;if(!Object.keys(S.abs[date]).length)delete S.abs[date];save();const y=scrollY;render();scrollTo(0,y)}
+function rAlerts(){
+ const all=stats();const list=all.filter(a=>filt==='all'||String(a.lv)===filt);
+ const f=[['all','الكل'],['3','٣ أيام'],['5','٥ أيام'],['10','١٠ أيام']];
+ $('#app').innerHTML=`<div class="tabs2">${f.map(([k,l])=>`<button class="${filt===k?'on':''}" onclick="filt='${k}';render()">${l}</button>`).join('')}</div>`+
+ (list.length?list.map(a=>`<div class="card al ${a.t} ${S.done[a.key]?'done':''}"><div class="row"><div class="lv">${a.lv}</div><div class="sp"><b>${esc(a.s.name)}</b> <span class="cls">${esc(a.s.cls||'')}</span><br><span class="tag ${a.t}">${a.t==='e'?'غياب بعذر':'غياب بدون عذر'}</span> <span class="cls">إجمالي ${a.n} أيام</span></div></div><div class="dates">${a.ds.map(fd).join(' • ')}</div><div class="row"><button class="btn" onclick="form('${a.key}')">📄 نموذج الغياب</button><button class="btn s" onclick="done('${a.key}')">${S.done[a.key]?'↩ إلغاء':'✓ تم الإجراء'}</button></div></div>`).join(''):'<div class="empty">لا توجد تنبيهات 🎉<br>تظهر الطالبة هنا عند ٣ أو ٥ أو ١٠ أيام غياب</div>')}
+function done(k){S.done[k]=!S.done[k];if(!S.done[k])delete S.done[k];save();render()}
+function form(k){const a=stats().find(x=>x.key===k);if(!a)return;
+ $('#modal').innerHTML=`<div class="sheet"><h2>نموذج متابعة غياب طالبة</h2><div class="sub">إعداد الإدارية: منال اليحيى</div>
+ <table><tr><td>اسم الطالبة</td><td><input value="${esc(a.s.name)}"></td></tr><tr><td>الصف / الشعبة</td><td><input value="${esc(a.s.cls||'')}"></td></tr><tr><td>نوع الغياب</td><td><input value="${a.t==='e'?'بعذر':'بدون عذر'}"></td></tr><tr><td>عدد الأيام</td><td><input value="${a.n} أيام (بلغت ${a.lv})"></td></tr><tr><td>التواريخ</td><td><textarea rows="${Math.min(a.ds.length+1,6)}">${a.ds.map(fd).join('\n')}</textarea></td></tr><tr><td>الإجراء المتخذ</td><td><textarea rows="2">${ACT[a.lv]}</textarea></td></tr><tr><td>تاريخ التعبئة</td><td><input value="${fd(new Date().toISOString().slice(0,10))}"></td></tr><tr><td>ملاحظات</td><td><textarea rows="2"></textarea></td></tr></table>
+ <div class="sig"><span>المعلمة: ..............</span><span>الوكيلة: ..............</span><span>ولي الأمر: ..............</span></div>
+ <div class="row noprint" style="margin-top:18px"><button class="btn" onclick="print()">🖨️ طباعة</button><button class="btn s" onclick="done('${k}');closeM()">✓ تم الإجراء</button><button class="btn g" onclick="closeM()">إغلاق</button></div></div>`;
+ $('#modal').classList.add('show')}
+function closeM(){$('#modal').classList.remove('show')}
+var stat='todo';
+function sst(k){stat=k;render()}
+function sfl(k){filt=k;render()}
+var hm=new Date().toISOString().slice(0,7),hq='';
+const MN=m=>new Date(m+'-01T00:00:00').toLocaleDateString('ar-SA-u-ca-gregory',{month:'long',year:'numeric'});
+const abN=id=>Object.keys(S.abs).filter(d=>d.slice(0,7)===hm&&S.abs[d][id]).length;
+function hl(){S.honor=S.honor||{};return S.honor[hm]=S.honor[hm]||[]}
+function tgH(id){const l=hl(),i=l.indexOf(id);if(i<0)l.push(id);else l.splice(i,1);save();drawH()}
+function autoH(){if(!confirm('سيتم اختيار كل الطالبات اللي ما عليهن غياب مسجّل في هذا الشهر، ويستبدل اختياراتك الحالية. متابعة؟'))return;hl();S.honor[hm]=S.students.filter(s=>!abN(s.id)).map(s=>s.id);save();drawH()}
+function rHonor(){$('#app').innerHTML=`<div class='card'><h2 style='margin:0 0 6px;font-size:22px'>🏅 المواظبات</h2><div class='dates' style='margin:0 0 10px'>اختاري الشهر ثم حددي الطالبات المواظبات بالضغط على الاسم، أو خلّي الصفحة تقترحهن.</div><input type='month' value='${hm}' onchange="hm=this.value;rHonor()"><div class='row' style='margin-top:10px'><button class='btn s' onclick="autoH()">✨ اقتراح تلقائي (بدون غياب)</button><button class='btn' onclick="printH()">🖨️ طباعة القائمة</button></div></div><div class='card'><input placeholder='🔍 ابحثي عن اسم طالبة' value='${esc(hq)}' oninput="hq=this.value;drawH()"><div id='hc' class='dates' style='margin:8px 0'></div><div id='hlist'></div></div>`;drawH()}
+function drawH(){const l=hl(),q=hq.trim();$('#hc').textContent='المختارات: '+AD(l.length)+' من '+AD(S.students.length)+' — '+MN(hm);$('#hlist').innerHTML=S.students.filter(s=>!q||s.name.includes(q)).map(s=>{const on=l.includes(s.id),n=abN(s.id);return `<div class='st' onclick="tgH('${s.id}')" style='cursor:pointer'><span style='font-size:22px'>${on?'⭐':'☆'}</span><b>${esc(s.name)} <span class='cls'>${esc(s.cls||'')}</span></b>${n?`<span class='tag u'>${AD(n)} غياب</span>`:''}</div>`}).join('')||`<div class='empty'>لا توجد طالبات</div>`}
+function printH(){const l=hl();if(!l.length){alert('اختاري طالبات أول');return}const sel=S.students.filter(s=>l.includes(s.id)).sort((a,b)=>(a.cls||'').localeCompare(b.cls||'','ar'));const td=new Date().toISOString().slice(0,10);
+$('#modal').innerHTML=`<div class='sheet'><div class='hd'><div>المملكة العربية السعودية<br>وزارة التعليم<br>إدارة تعليم منطقة الرياض<br>متوسطة فاطمة بنت الخطاب</div><div style='font-size:34px'>⭐</div><div>التاريخ: ${hij(td)}<br>الموافق: ${gr(td)}<br>الفصل الدراسي: الأول ١٤٤٨هـ</div></div><div class='ttl'>🏅 الطالبات المواظبات – شهر ${MN(hm)}</div><table class='t2'><tr><th>م</th><th>اسم الطالبة</th><th>الصف</th></tr>${sel.map((s,i)=>`<tr><td>${AD(i+1)}</td><td>${esc(s.name)}</td><td>${esc(s.cls||'')}</td></tr>`).join('')}</table><div class='note'>إجمالي المواظبات: ${AD(sel.length)} طالبة</div><div class='sig' style='justify-content:flex-start'><span>مديرة المدرسة<br><b>أ. آمنة الرشيدي</b></span></div><div class='row noprint' style='margin-top:18px'><button class='btn' onclick="print()">🖨️ طباعة</button><button class='btn g' onclick="closeM()">إغلاق</button></div></div>`;$('#modal').classList.add('show')}
+const AD=s=>String(s).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+const hij=d=>new Date(d+'T00:00:00').toLocaleDateString('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'});
+const wk=d=>new Date(d+'T00:00:00').toLocaleDateString('ar-SA',{weekday:'long'});
+const gr=d=>AD(d.slice(8)+'/'+d.slice(5,7)+'/'+d.slice(0,4));
+const AC={u:{3:['تحويل الطالبة للموجهة الطلابية، واستدعاء ولي الأمر، وأخذ تعهد خطي',34],5:['استدعاء ولي الأمر، وإحالة الطالبة للجنة التوجيه، وتنبيهها',34],10:['مخاطبة الجهات المختصة (حماية الطفل) وإشعار إدارة التعليم',34]},e:{3:['تحويلها للموجهة الطلابية لوضع خطة تعلّم واستدعاء ولي الأمر',33],5:['استدعاء ولي الأمر ومتابعة خطة التعلّم',33],10:['رفع الحالة لقائدة المدرسة ومتابعة أسباب الغياب مع ولي الأمر',33]}};
+function rAlerts(){const all=stats(),todo=all.filter(a=>!S.done[a.key]),dn=all.filter(a=>S.done[a.key]);let list=stat==='todo'?todo:stat==='done'?dn:all;list=list.filter(a=>filt==='all'||String(a.lv)===filt);
+const T=[['todo','تحتاج إجراء ('+AD(todo.length)+')'],['done','نُفّذت'],['all','الكل']],f=[['all','كل المستويات'],['3','٣ أيام'],['5','٥ أيام'],['10','١٠ أيام']];
+$('#app').innerHTML=`<div class='card'><h2 style='margin:0 0 8px;font-size:22px'>🔔 التنبيهات</h2><div class='tabs2'>${T.map(([k,l])=>`<button class='${stat===k?'on':''}' onclick="sst('${k}')">${l}</button>`).join('')}</div><div class='dates' style='margin:0 0 8px'>حسب قواعد السلوك والمواظبة ١٤٤٧هـ. حد الحرمان: ٩ يوم بدون عذر من ٩٠ يوم دراسي.</div><div class='tabs2' style='margin:0'>${f.map(([k,l])=>`<button class='${filt===k?'on':''}' onclick="sfl('${k}')">${l}</button>`).join('')}</div></div>`+(list.length?list.map(a=>{const c=AC[a.t][a.lv];return `<div class='card al ${a.t} ${S.done[a.key]?'done':''}'><div class='row' style='align-items:flex-start;flex-wrap:nowrap'><div class='sp'><b style='font-size:17px'>غياب ${a.t==='e'?'بعذر':'بدون عذر'} – ${AD(a.lv)} أيام</b><div class='dates' style='margin:2px 0 6px'>${AD(a.n)} أيام · آخرها ${gr(a.ds[a.ds.length-1])}</div><div><span class='nm'>${esc(a.s.name)}</span> <span class='cls'>· ${esc(a.s.cls||'')}</span></div><div class='dates'>${c[0]} (المادة ${AD(c[1])})</div></div><div style='font-size:36px'>${a.t==='e'?'🛡️':'🔔'}</div></div><div class='row' style='margin-top:6px'><button class='btn s' onclick="form('${a.key}')">نموذج ${a.t==='e'?'١٥':'١٦'}</button><button class='btn' onclick="done('${a.key}')">${S.done[a.key]?'↩ إلغاء':'تم الإجراء'}</button></div></div>`}).join(''):`<div class='empty'>لا توجد تنبيهات 🎉</div>`)}
+function form(k){const a=stats().find(x=>x.key===k);if(!a)return;const id=a.s.id,n=t=>Object.keys(S.abs).filter(d=>S.abs[d][id]===t).length,eN=n('e'),uN=n('u'),td=new Date().toISOString().slice(0,10),u=a.t==='u';
+const rows=a.ds.map((d,i)=>`<tr><td>${AD(i+1)}</td><td>${wk(d)}</td><td>${hij(d)}</td><td>${gr(d)}</td><td><input></td></tr>`).join('');
+const acts=[3,5,10].map(l=>`<tr class='${l===a.lv?'cur':''}'><td>${AC[a.t][l][0]}</td><td>${AD(l)} أيام</td><td><input value='${l===a.lv?gr(td):''}'></td><td><input></td></tr>`).join('');
+$('#modal').innerHTML=`<div class='sheet'><div class='hd'><div>المملكة العربية السعودية<br>وزارة التعليم<br>إدارة تعليم منطقة الرياض<br>متوسطة فاطمة بنت الخطاب</div><div style='font-size:34px'>⭐</div><div>التاريخ: ${hij(td)}<br>الموافق: ${gr(td)}<br>الفصل الدراسي: الأول ١٤٤٨هـ</div></div><div class='ttl'>نموذج (${u?'١٦':'١٥'}) إجراءات الغياب ${u?'بدون عذر':'بعذر'}</div><table class='t2'><tr><td class='l'>اسم الطالبة</td><td><input value='${esc(a.s.name)}'></td><td class='l'>الفصل</td><td><input value='${esc(a.s.cls||'')}'></td></tr><tr><td class='l'>غياب بعذر</td><td>${AD(eN)} يوم</td><td class='l'>غياب بدون عذر</td><td>${AD(uN)} يوم</td></tr><tr><td class='l'>التأخر</td><td>٠ مرة</td><td class='l'>درجة المواظبة</td><td>${AD(Math.max(0,100-uN))} / ١٠٠</td></tr></table><b>أيام الغياب ${u?'بدون عذر':'بعذر'}</b><table class='t2'><tr><th>م</th><th>اليوم</th><th>التاريخ الهجري</th><th>الموافق</th><th>ملاحظة</th></tr>${rows}</table><b>الإجراءات المتخذة</b><table class='t2'><tr><th>الإجراء</th><th>عدد الأيام</th><th>تاريخ التنفيذ</th><th>التوقيع</th></tr>${acts}</table>${u?`<div class='note'>تُحرم الطالبة عند تجاوز غيابها بدون عذر ١٠٪ من أيام الدراسة (المادة ٣١). ويُحسم من درجة المواظبة درجة عن كل يوم غياب بدون عذر.</div>`:''}<div class='sig' style='justify-content:flex-start'><span>مديرة المدرسة<br><b>أ. آمنة الرشيدي</b></span></div><div class='row noprint' style='margin-top:18px'><button class='btn' onclick="print()">🖨️ طباعة</button><button class='btn s' onclick="done('${k}');closeM()">✓ تم الإجراء</button><button class='btn g' onclick="closeM()">إغلاق</button></div></div>`;
+$('#modal').classList.add('show')}
+render();
+</script>
+</body>
+</html>
